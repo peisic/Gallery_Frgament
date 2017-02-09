@@ -27,6 +27,9 @@ import java.io.IOException;
 public class GalleryFrag extends Fragment {
 
     ImageView mImageView;
+    //2.0
+    PinchZoomImageView mPinchZoomImageView;
+
     private static final int REQUEST_OPEN_CODE = 0;
 
 
@@ -42,6 +45,9 @@ public class GalleryFrag extends Fragment {
         // Inflate the layout for this fragment
 
         View v = inflater.inflate(R.layout.frag_gallery, container, false);
+
+        //2.1
+        mPinchZoomImageView = (PinchZoomImageView) v.findViewById(R.id.pinchZoomImageView);
 
         mImageView = (ImageView) v.findViewById(R.id.imageView);
 
@@ -72,9 +78,16 @@ public class GalleryFrag extends Fragment {
                     e.printStackTrace();
                 }
                */
+                /*
                 Glide.with(this)
                         .load(uri)
                         .into(mImageView);
+                        */
+
+                //2.3
+                Glide.with(this)
+                        .load(uri)
+                        .into(mPinchZoomImageView);
             }
         }
     }
