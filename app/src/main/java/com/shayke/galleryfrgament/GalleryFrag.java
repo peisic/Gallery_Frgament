@@ -51,6 +51,8 @@ public class GalleryFrag extends Fragment {
 
         mImageView = (ImageView) v.findViewById(R.id.imageView);
 
+        //note for ver4 to check the test
+
 
 
         Intent intent = new Intent (Intent.ACTION_OPEN_DOCUMENT);
