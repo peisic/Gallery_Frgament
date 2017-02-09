@@ -68,7 +68,8 @@ public class GalleryFrag extends Fragment {
             @Override
             public boolean onLongClick(View v) {
                 // Toast.makeText(getApplicationContext(), "ImageView long pressed!", Toast.LENGTH_SHORT).show();
-                zoomImageFromThumb();
+               // zoomImageFromThumb();
+                pinchZoomPan();
                 return true;
             }
         });
@@ -202,10 +203,13 @@ public class GalleryFrag extends Fragment {
         });
         set.start();
         mCurrentAnimator = set;
-
-
-
     }
+    private void pinchZoomPan() {
+        mPinchZoomImageView.setImageUri(mImageUri);
+        mImageView.setAlpha(0.f);
+        mPinchZoomImageView.setVisibility(View.VISIBLE);
+    }
+
 }
 
 
