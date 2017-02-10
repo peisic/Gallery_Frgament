@@ -27,6 +27,26 @@ public class PinchZoomImageView extends ImageView {
     }
 
     @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+
+        int imageWidth = MeasureSpec.getSize(widthMeasureSpec);
+        int imageHeight = MeasureSpec.getSize(heightMeasureSpec);
+
+        setMeasuredDimension(
+                Math.min(imageWidth, mImageWidth),
+                Math.min(imageHeight, mImageHeight)
+        );
+    }
+
+
+
+
+
+
+
+
+    @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 

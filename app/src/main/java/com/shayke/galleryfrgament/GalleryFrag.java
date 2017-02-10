@@ -19,6 +19,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
 
@@ -33,6 +34,8 @@ import java.io.IOException;
  */
 public class GalleryFrag extends Fragment {
 
+
+
     ImageView mImageView;
     //2.0
     PinchZoomImageView mPinchZoomImageView;
@@ -43,6 +46,9 @@ public class GalleryFrag extends Fragment {
 
 
     private static final int REQUEST_OPEN_CODE = 0;
+
+
+
 
 
 
@@ -81,9 +87,39 @@ public class GalleryFrag extends Fragment {
         intent.setType("image/*");
         startActivityForResult(intent, REQUEST_OPEN_CODE);
 
+        final ViewTreeObserver viewTreeObserver = v.getViewTreeObserver();
+        viewTreeObserver.addOnWindowFocusChangeListener(new ViewTreeObserver.OnWindowFocusChangeListener() {
+            @Override
+            public void onWindowFocusChanged(final boolean hasFocus) {
+
+                View decorView = getActivity().getWindow().getDecorView();
+                if(hasFocus) {
+                    decorView.setSystemUiVisibility(
+                            View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                                    | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                                    | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                                    | View.SYSTEM_UI_FLAG_FULLSCREEN
+                                    | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                                    | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                    );
+                }
+            }
+
+
+        });
+
         return v;
 
     }
+
+
+
+
+
+
+
+
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent resultData) {
