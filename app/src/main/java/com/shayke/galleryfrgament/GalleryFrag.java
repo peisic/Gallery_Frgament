@@ -60,6 +60,7 @@ public class GalleryFrag extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        LogUtil.logMethodCalled();
         // Inflate the layout for this fragment
 
         View v = inflater.inflate(R.layout.frag_gallery, container, false);
@@ -73,6 +74,7 @@ public class GalleryFrag extends Fragment {
         mImageView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
+                LogUtil.logMethodCalled();
                 // Toast.makeText(getApplicationContext(), "ImageView long pressed!", Toast.LENGTH_SHORT).show();
                // zoomImageFromThumb();
                 pinchZoomPan();
@@ -91,6 +93,7 @@ public class GalleryFrag extends Fragment {
         viewTreeObserver.addOnWindowFocusChangeListener(new ViewTreeObserver.OnWindowFocusChangeListener() {
             @Override
             public void onWindowFocusChanged(final boolean hasFocus) {
+                LogUtil.logMethodCalled();
 
                 View decorView = getActivity().getWindow().getDecorView();
                 if(hasFocus) {
@@ -123,7 +126,7 @@ public class GalleryFrag extends Fragment {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent resultData) {
-
+        LogUtil.logMethodCalled();
         if (requestCode == REQUEST_OPEN_CODE && resultCode == Activity.RESULT_OK) {
 
             if (resultData != null) {
@@ -150,6 +153,7 @@ public class GalleryFrag extends Fragment {
 
 
     private Bitmap getBitmapFromUri(Uri uri) throws IOException {
+        LogUtil.logMethodCalled();
 
         ParcelFileDescriptor parcelFileDescriptor = getContext().getContentResolver().openFileDescriptor(uri, "r");
         FileDescriptor fileDescriptor = parcelFileDescriptor.getFileDescriptor();
@@ -162,6 +166,7 @@ public class GalleryFrag extends Fragment {
 
     // a method that is creating the animation
     private void zoomImageFromThumb(){
+        LogUtil.logMethodCalled();
         //here we check if there's animation running and if yes than cancel it
     if(mCurrentAnimator !=null){
         mCurrentAnimator.cancel();
@@ -225,6 +230,7 @@ public class GalleryFrag extends Fragment {
         set.addListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationCancel(Animator animation) {
+                LogUtil.logMethodCalled();
                 super.onAnimationCancel(animation);
 
                 mCurrentAnimator = null;
@@ -232,6 +238,7 @@ public class GalleryFrag extends Fragment {
 
             @Override
             public void onAnimationEnd(Animator animation) {
+                LogUtil.logMethodCalled();
                 super.onAnimationEnd(animation);
 
                 mCurrentAnimator = null;
@@ -241,6 +248,7 @@ public class GalleryFrag extends Fragment {
         mCurrentAnimator = set;
     }
     private void pinchZoomPan() {
+        LogUtil.logMethodCalled();
         mPinchZoomImageView.setImageUri(mImageUri);
         mImageView.setAlpha(0.f);
         mPinchZoomImageView.setVisibility(View.VISIBLE);

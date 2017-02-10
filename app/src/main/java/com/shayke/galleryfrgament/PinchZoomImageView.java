@@ -40,6 +40,7 @@ public class PinchZoomImageView extends ImageView {
 
         @Override
         public boolean onScale(ScaleGestureDetector detector) {
+            LogUtil.logMethodCalled();
             mScaleFactor *= detector.getScaleFactor();
             mScaleFactor = Math.max(mMinZoom, Math.min(mMaxZoom, mScaleFactor));
             //invalidate();
@@ -51,12 +52,16 @@ public class PinchZoomImageView extends ImageView {
 
     public PinchZoomImageView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        LogUtil.logMethodCalled();
 
         mScaleGestureDetector = new ScaleGestureDetector(getContext(), new ScaleListener());
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+
+        LogUtil.logMethodCalled();
+
 
         switch(event.getAction() & MotionEvent.ACTION_MASK) {
             case MotionEvent.ACTION_DOWN:
@@ -93,6 +98,7 @@ public class PinchZoomImageView extends ImageView {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        LogUtil.logMethodCalled();
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 
         int imageWidth = MeasureSpec.getSize(widthMeasureSpec);
@@ -113,6 +119,9 @@ public class PinchZoomImageView extends ImageView {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+
+        LogUtil.logMethodCalled();
+
         canvas.scale(mScaleFactor, mScaleFactor);
       //  canvas.scale(mScaleFactor, mScaleFactor, mScaleGestureDetector.getFocusX(), mScaleGestureDetector.getFocusY());
         canvas.save();
@@ -125,9 +134,11 @@ public class PinchZoomImageView extends ImageView {
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
+        LogUtil.logMethodCalled();
     }
 
     public void setImageUri(Uri uri) {
+        LogUtil.logMethodCalled();
         try {
             Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), uri);
             float aspecRatio = (float) bitmap.getHeight() / (float) bitmap.getWidth();
